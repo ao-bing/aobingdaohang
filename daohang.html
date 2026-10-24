@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>敖丙导航</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0c0e2b 0%, #1a1a4e 40%, #0d1b3e 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Microsoft YaHei", sans-serif;
+    color: #fff;
+}
+
+.logo {
+    font-size: 52px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #00d2ff, #7b2ff7, #ff2e93);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 40px;
+}
+
+.search-box {
+    display: flex;
+    width: 600px;
+    max-width: 90vw;
+    height: 52px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 26px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    padding: 0 22px;
+}
+
+.search-box input::placeholder {
+    color: #6b7280;
+}
+
+.search-box button {
+    width: 100px;
+    border: none;
+    background: linear-gradient(135deg, #00d2ff, #7b2ff7);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.search-box button:hover {
+    opacity: 0.85;
+}
+</style>
+</head>
+<body>
+
+<div class="logo">敖丙浏览器</div>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="搜索关键词或输入网址..." autofocus>
+    <button onclick="doSearch()">搜索</button>
+</div>
+
+<script>
+function doSearch() {
+    var q = document.getElementById('searchInput').value.trim();
+    if (!q) return;
+    if (q.indexOf('.') > 0 && q.indexOf(' ') < 0) {
+        if (q.indexOf('://') < 0) q = 'https://' + q;
+        window.location.href = q;
+    } else {
+        window.location.href = 'https://www.baidu.com/s?wd=' + encodeURIComponent(q);
+    }
+}
+
+document.getElementById('searchInput').addEventListener('keydown', function(e) {
+    if (e.keyCode === 13) doSearch();
+});
+</script>
+
+</body>
+</html>
